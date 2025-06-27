@@ -21,6 +21,13 @@ stage ('build') {
 			bat 'dotnet build  --configuration Release'
 		}
 	}
+stage ('public den t thu muc')
+	{
+		steps{
+			echo 'Publishing...'
+			bat 'dotnet publish -c Release -o ./publish'
+		}
+	}
 
   } // end stages
 }//end pipeline
