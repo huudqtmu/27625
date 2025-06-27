@@ -50,7 +50,7 @@ stage ('public den t thu muc')
 		// dua vao docker image
 		stage('docker image') {
             steps {
-                  sh 'docker build -t p27625 .'
+                 sh "docker build -t p27625:latest ."
                 }
             }
 		// dua vao docker image
