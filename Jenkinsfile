@@ -28,6 +28,13 @@ stage ('public den t thu muc')
 			bat 'dotnet publish -c Release -o ./publish'
 		}
 	}
+	stage ('Publish') {
+		steps {
+			echo 'public 2 runnig folder'
+			//iisreset /stop // stop iis de ghi de file 
+			bat 'xcopy "%WORKSPACE%\\publish" /E /Y /I /R "c:\\wwwroot\\P27625"'
+ 		}
+	}
 
   } // end stages
 }//end pipeline
