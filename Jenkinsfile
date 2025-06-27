@@ -50,13 +50,13 @@ stage ('public den t thu muc')
 		// dua vao docker image
 		stage('docker image') {
             steps {
-                  powershell ''' docker build -t p27625 .'''
+                  sh 'docker build -t p27625 .'
                 }
             }
 		// dua vao docker image
 		stage('docker run') {
             steps {
-                  powershell ''' docker run -d [--name p27625run] -p 91:80 p27625'''
+                  sh 'docker run -d [--name p27625run] -p 91:80 p27625'
                 }
             }
   } // end stages
