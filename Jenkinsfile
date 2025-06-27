@@ -44,7 +44,7 @@ stage ('public den t thu muc')
                     New-Website -Name "P27625" -Port 81 -PhysicalPath "c:\\wwwroot\\P27625"
                 }
                 '''
-            }
+            } 
         } // end deploy iis
 
   } // end stages
