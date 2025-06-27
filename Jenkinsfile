@@ -50,7 +50,7 @@ stage ('public den t thu muc')
 		// dua vao docker image
 		stage('docker image') {
             steps {
-                 bat 'docker build -t p27625 -f docker/Dockerfile .'
+                 bat 'docker build -t p27625 -f "%WORKSPACE%\\docker" .'
                 }
             }
 		// dua vao docker image
