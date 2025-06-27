@@ -51,9 +51,13 @@ stage ('public den t thu muc')
 		stage('docker image') {
             steps {
                  bat 'docker build -t p27625'
+                }
+            }
+		// dua vao docker image
+		stage('docker run') {
+            steps {
                  bat 'docker run -d [--name p27625run] -p 91:80 p27625'
                 }
             }
-
   } // end stages
 }//end pipeline
