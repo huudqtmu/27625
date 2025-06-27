@@ -47,5 +47,14 @@ stage ('public den t thu muc')
             } 
         } // end deploy iis
 
+		// dua vao docker image
+		stage('docker image') {
+            steps {
+                 bat 'docker build -t p27625'
+                 bat 'docker run -d [--name p27625run] -p 91:80 p27625'
+                }
+              
+            } 
+        } // end deploy iis
   } // end stages
 }//end pipeline
