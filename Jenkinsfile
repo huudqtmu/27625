@@ -35,6 +35,16 @@ stage ('public den t thu muc')
 			bat 'xcopy "%WORKSPACE%\\publish" /E /Y /I /R "c:\\wwwroot\\P27625"'
  		}
 	}
+	stage('Deploy to IIS') {
+            steps {
+                powershell '''
+                 Import-Module WebAdministration
+                if (-not (Test-Path IIS:\\Sites\\P27625)) {
+                    New-Website -Name "P27625" -Port 81 -PhysicalPath "c:\\wwwroot\\P27625"
+                }
+                '''
+            }
+        } // end deploy iis
 
   } // end stages
 }//end pipeline
