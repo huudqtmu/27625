@@ -31,8 +31,9 @@ stage ('public den t thu muc')
 	stage ('Publish') {
 		steps {
 			echo 'public 2 runnig folder'
-			//iisreset /stop // stop iis de ghi de file 
+			bat 'iisreset /stop'
 			bat 'xcopy "%WORKSPACE%\\publish" /E /Y /I /R "c:\\wwwroot\\P27625"'
+			bat 'iisreset /start'
  		}
 	}
 	stage('Deploy to IIS') {
