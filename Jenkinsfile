@@ -1,4 +1,4 @@
-pipeline {
+﻿pipeline {
  agent any
  
  stages {
@@ -50,7 +50,7 @@ stage ('public den t thu muc')
 		stage('docker image') {
             steps {
                  bat '''
-					  docker build -t p27625:lastest -f "%WORKSPACE%\\Dockerfile" .
+					  docker build -t p27625:latest -f "%WORKSPACE%\\Dockerfile" .
 					'''
                 }
             }
@@ -60,12 +60,20 @@ stage ('public den t thu muc')
             steps {
 				// # Stop old container 
 				// bat 'docker stop p27625run'
-				bat '''
-					for /f "delims=" %i in ('docker ps -a --filter "name=p27625run" --format "{{.Names}}"') do @set container=%i
+				 bat '''
+					@echo off
+					for /f "delims=" %%i in ('docker ps -a --filter "name=p27625run" --format "{{.Names}}"') do (
+						set container=%%i
+					)
 					if defined container (
+					 
+						docker stop p27625run >nul 2>&1
+						 
 						docker rm p27625run
-					)  
-					'''
+					) else (
+						echo Không tìm thấy container p27625run
+					)
+                '''
 
 				// # Remove container 
 				 // bat 'docker rm p27625run'
