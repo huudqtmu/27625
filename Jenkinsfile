@@ -58,10 +58,10 @@ stage ('public den t thu muc')
 		// dua vao docker image
 		stage('docker run') {
             steps {
-				# Stop old container 
+				// # Stop old container 
 				 bat 'docker stop p27625run'
 
-				# Remove container 
+				// # Remove container 
 				 bat 'docker rm p27625run'
 
                   bat 'docker run -d --name p27625run -p 91:3000 p27625:lastest'
