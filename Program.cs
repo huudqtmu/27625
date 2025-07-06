@@ -5,7 +5,7 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-builder.WebHost.UseUrls("http://0.0.0.0:80"); // Đảm bảo dòng này có mặt khi đóng dockers
+builder.WebHost.UseUrls("http://0.0.0.0:3000"); // Đảm bảo dòng này có mặt khi đóng dockers
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
