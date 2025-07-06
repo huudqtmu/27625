@@ -57,7 +57,7 @@ stage ('public den t thu muc')
 		// dua vao docker image
 		stage('docker run') {
             steps {
-                  sh 'docker run -d [--name p27625run] -p 91:80 p27625'
+                  sh 'docker run -d --name p27625run -p 91:80 p27625'
                 }
             }
 		
