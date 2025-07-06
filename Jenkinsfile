@@ -61,10 +61,11 @@ stage ('public den t thu muc')
 				// # Stop old container 
 				// bat 'docker stop p27625run'
 				bat '''
-					$container = docker ps -a --filter "name=p27625run" --format "{{.Names}}"
-					if ($container) {
-						 docker rm p27625run
-					}  '''
+					for /f "delims=" %i in ('docker ps -a --filter "name=p27625run" --format "{{.Names}}"') do @set container=%i
+					if defined container (
+						docker rm p27625run
+					)  
+					'''
 
 				// # Remove container 
 				 // bat 'docker rm p27625run'
