@@ -1,16 +1,14 @@
 ﻿pipeline {
  agent any
- 
+
+ //setup môi trường đọc unicode
+  environment {
+        LANG = 'en_US.UTF-8'
+        LC_ALL = 'en_US.UTF-8'
+    }
+
  stages {
-	 stage('Unicode Test') {
-            steps {
-                bat '''
-                @echo off
-                chcp 65001
-                echo Xin chào tiếng Việt: Đặng Văn Nam
-                '''
-            }
-        }
+	 
 
 	stage('clone'){
 		steps {
