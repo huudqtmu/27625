@@ -60,11 +60,11 @@ stage ('public den t thu muc')
             steps {
 				// # Stop old container 
 				// bat 'docker stop p27625run'
-				bat ' 
-				$container = docker ps -a --filter "name=p27625run" --format "{{.Names}}"
+				bat '''
+					$container = docker ps -a --filter "name=p27625run" --format "{{.Names}}"
 					if ($container) {
 						 docker rm p27625run
-					}  '
+					}  '''
 
 				// # Remove container 
 				 // bat 'docker rm p27625run'
