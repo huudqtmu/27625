@@ -1,7 +1,17 @@
-pipeline {
+﻿pipeline {
  agent any
  
  stages {
+	 stage('Unicode Test') {
+            steps {
+                bat '''
+                @echo off
+                chcp 65001
+                echo Xin chào tiếng Việt: Đặng Văn Nam
+                '''
+            }
+        }
+
 	stage('clone'){
 		steps {
 			echo 'Cloning source code'
