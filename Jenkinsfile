@@ -61,6 +61,6 @@ stage ('public den t thu muc')
                   bat 'docker run -d --name p27625run -p 91:80 p27625:lastest'
                 }
             }
-		
+		 
   } // end stages
 }//end pipeline
