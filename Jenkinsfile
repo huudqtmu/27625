@@ -96,7 +96,7 @@ stage ('public den t thu muc')
                 script {
                     // push Docker image lên Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image("p27625").push()
+                        docker.image("p27625:v1.0").push()
                     }
                 }
             }
@@ -105,7 +105,7 @@ stage ('public den t thu muc')
         stage('Cleanup') {
             steps {
                 // clean image Docker after push
-                bat 'docker rmi p27625'
+                bat 'docker rmi p27625:v1.0'
             }
         }
 
