@@ -73,6 +73,12 @@ stage ('public den t thu muc')
                 }
             }
         }
+		stage('Tag Docker Image') {
+            steps {
+				//bat 'docker tag firstimage p27625/firstimage'
+          		 docker.image("p27625").tag("p27625:v1")
+            }
+        }
 
         stage('Login to Docker Hub') {
             steps {
@@ -84,19 +90,14 @@ stage ('public den t thu muc')
                 }
             }
         }
-		 stage('Tag Docker Image') {
-            steps {
-				//bat 'docker tag firstimage p27625/firstimage'
-          		 docker.image("p27625").tag("p27625:v1.0")
-            }
-        }
+		 
         stage('Push Docker Image') {
             steps {
 				 
                 script {
                     // push Docker image lên Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image("p27625:v1.0").push()
+                        docker.image("p27625:v1").push()
                     }
                 }
             }
@@ -105,7 +106,7 @@ stage ('public den t thu muc')
         stage('Cleanup') {
             steps {
                 // clean image Docker after push
-                bat 'docker rmi p27625:v1.0'
+                bat 'docker rmi p27625:v1'
             }
         }
 
