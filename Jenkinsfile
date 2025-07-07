@@ -69,14 +69,14 @@ stage ('public den t thu muc')
             steps {
                 script {
                     // Build Docker image from Dockerfile
-                    docker.build("p27625")
+                    docker.build("p27625:latest")
                 }
             }
         }
 		stage('Tag Docker Image') {
             steps {
 				//bat 'docker tag firstimage p27625/firstimage'
-          		 docker.image("p27625").tag("p27625:v1")
+          		 docker.image("p27625:latest").tag("p27625:v1")
             }
         }
 
