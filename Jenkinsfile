@@ -90,9 +90,12 @@ stage ('public den t thu muc')
 		 
 		 stage('Tag Docker Image') {
 		   steps {
-			   script {
-          			  docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
-				}
+			 
+				bat 'docker tag "huudq/p27625:latest" "huudq/p27625:v1"'
+			 
+				//script {
+          		//		  docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+				//	}
 			}
         }
 
