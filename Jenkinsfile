@@ -86,8 +86,8 @@ stage ('public den t thu muc')
         }
 		 stage('Tag Docker Image') {
             steps {
-				bat 'docker tag firstimage p27625/firstimage'
-          		 
+				//bat 'docker tag firstimage p27625/firstimage'
+          		 docker.image("p27625").tag("p27625:v1.0")
             }
         }
         stage('Push Docker Image') {
