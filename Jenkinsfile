@@ -5,7 +5,7 @@ pipeline {
         LANG = 'en_US.UTF-8'
         LC_ALL = 'en_US.UTF-8'
 		DOCKERHUB_CREDENTIALS = 'hubdocker'  // ID credentials
-        IMAGE_NAME = 'p27625'  // name of image on Docker Hub
+        IMAGE_NAME = 'huudq/p27625 '  // name of image on Docker Hub -- create repo on hub.docker
     }
 
  stages {
