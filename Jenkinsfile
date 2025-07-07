@@ -6,6 +6,8 @@ pipeline {
         LC_ALL = 'en_US.UTF-8'
 		DOCKERHUB_CREDENTIALS = 'hubdocker'  // ID credentials
         IMAGE_NAME = 'huudq/p27625 '  // name of image on Docker Hub -- create repo on hub.docker
+		DOCKER_IMAGE_NAME = 'p27625'  // Tên Docker image
+        DOCKER_TAG = 'v1'  // Tag cho Docker image
     }
 
  stages {
@@ -69,14 +71,13 @@ stage ('public den t thu muc')
             steps {
                 script {
                     // Build Docker image from Dockerfile
-                    docker.build("p27625:latest")
+                    docker.build("${DOCKER_IMAGE_NAME}:latest")
                 }
             }
         }
 		stage('Tag Docker Image') {
             steps {
-				//bat 'docker tag firstimage p27625/firstimage'
-          		 docker.image("p27625:latest").tag("p27625:v1")
+          		 docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
             }
         }
 
@@ -97,7 +98,7 @@ stage ('public den t thu muc')
                 script {
                     // push Docker image lên Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image("p27625:v1").push()
+                        docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}").push()
                     }
                 }
             }
@@ -106,7 +107,7 @@ stage ('public den t thu muc')
         stage('Cleanup') {
             steps {
                 // clean image Docker after push
-                bat 'docker rmi p27625:v1'
+                bat 'docker rmi ${DOCKER_IMAGE_NAME}:${DOCKER_TAG}'
             }
         }
 
