@@ -88,29 +88,24 @@ stage ('public den t thu muc')
             }
         }
 		 
-		 stage('Tag Docker Image') {
+		/* stage('Tag Docker Image') {
 		   steps {
-			 
 				bat 'docker tag "huudq/p27625:latest" "huudq/p27625:v1"'
-			 
-				//script {
-          		//		  docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
-				//	}
 			}
         }
-
+		*/
         stage('Push Docker Image') {
             steps {
 				 
                 script {
-                    // push Docker image lên Docker Hub
+                    // push Docker image to Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
                         docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}").push()
                     }
                 }
             }
         }
-
+			/*
         stage('Cleanup') {
             steps {
                 // clean image Docker after push
@@ -118,7 +113,7 @@ stage ('public den t thu muc')
             }
         }
 
-		/*
+	
 		// dua vao docker image
 		stage('docker run') {
             steps {
