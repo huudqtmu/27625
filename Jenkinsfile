@@ -76,12 +76,13 @@ stage ('public den t thu muc')
             }
         }
 		stage('Tag Docker Image') {
-            steps {
-          		// docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
-				// docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
-				def image = docker.image("${DOCKER_IMAGE_NAME}:latest")
-                image.tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
-            }
+		   steps {
+			   script {
+          			  docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+					//def image = docker.image("${DOCKER_IMAGE_NAME}:latest")
+					//image.tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+				}
+			}
         }
 
         stage('Login to Docker Hub') {
