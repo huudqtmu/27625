@@ -37,7 +37,7 @@ stage ('public den t thu muc')
 			bat 'dotnet publish -c Release -o ./publish'
 		}
 	}
-	stage ('Publish') {
+/*	stage ('Publish') {
 		steps {
 			echo 'public 2 runnig folder'
 			bat 'iisreset /stop'
@@ -45,7 +45,7 @@ stage ('public den t thu muc')
 			bat 'iisreset /start'
  		}
 	}
-	/*
+	
 	stage('Deploy to IIS') {
             steps {
                 powershell '''
@@ -69,7 +69,7 @@ stage ('public den t thu muc')
             steps {
                 script {
                     // Build Docker image from Dockerfile
-                    docker.build("p27625:latest")
+                    docker.build("p27625")
                 }
             }
         }
@@ -84,13 +84,19 @@ stage ('public den t thu muc')
                 }
             }
         }
-
+		 stage('Tag Docker Image') {
+            steps {
+				bat 'docker tag firstimage p27625/firstimage'
+          		 
+            }
+        }
         stage('Push Docker Image') {
             steps {
+				 
                 script {
                     // push Docker image lên Docker Hub
                     docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
-                        docker.image("p27625:latest").push()
+                        docker.image("p27625").push()
                     }
                 }
             }
@@ -99,7 +105,7 @@ stage ('public den t thu muc')
         stage('Cleanup') {
             steps {
                 // clean image Docker after push
-                bat 'docker rmi p27625:latest'
+                bat 'docker rmi p27625'
             }
         }
 
