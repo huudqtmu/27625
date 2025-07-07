@@ -6,7 +6,7 @@ pipeline {
         LC_ALL = 'en_US.UTF-8'
 		DOCKERHUB_CREDENTIALS = 'hubdocker'  // ID credentials
         IMAGE_NAME = 'huudq/p27625 '  // name of image on Docker Hub -- create repo on hub.docker
-		DOCKER_IMAGE_NAME = 'p27625'  // Tên Docker image
+		DOCKER_IMAGE_NAME = 'p27625'  //  Docker image name
         DOCKER_TAG = 'v1'  // Tag cho Docker image
     }
 
@@ -77,7 +77,10 @@ stage ('public den t thu muc')
         }
 		stage('Tag Docker Image') {
             steps {
-          		 docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+          		// docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+				// docker.image("${DOCKER_IMAGE_NAME}:latest").tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
+				def image = docker.image("${DOCKER_IMAGE_NAME}:latest")
+                image.tag("${DOCKER_IMAGE_NAME}:${DOCKER_TAG}")
             }
         }
 
