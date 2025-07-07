@@ -4,6 +4,8 @@ pipeline {
   environment {
         LANG = 'en_US.UTF-8'
         LC_ALL = 'en_US.UTF-8'
+		DOCKERHUB_CREDENTIALS = 'hubdocker'  // ID credentials
+        IMAGE_NAME = 'p27625'  // name of image on Docker Hub
     }
 
  stages {
@@ -43,6 +45,7 @@ stage ('public den t thu muc')
 			bat 'iisreset /start'
  		}
 	}
+	/*
 	stage('Deploy to IIS') {
             steps {
                 powershell '''
@@ -61,7 +64,46 @@ stage ('public den t thu muc')
 					'''
                 }
             }
+	*/
+		stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image from Dockerfile
+                    docker.build("p27625:latest")
+                }
+            }
+        }
 
+        stage('Login to Docker Hub') {
+            steps {
+                script {
+                    // login Docker Hub to push image
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
+                        // login Docker Hub credentials
+                    }
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // push Docker image lên Docker Hub
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_CREDENTIALS) {
+                        docker.image("p27625:latest").push()
+                    }
+                }
+            }
+        }
+
+        stage('Cleanup') {
+            steps {
+                // clean image Docker after push
+                bat 'docker rmi p27625:latest'
+            }
+        }
+
+		/*
 		// dua vao docker image
 		stage('docker run') {
             steps {
@@ -86,6 +128,6 @@ stage ('public den t thu muc')
                   bat 'docker run -d --name p27625run -p 91:3000 p27625:latest'
                 }
             }
-		 
+		 */
   } // end stages
 }//end pipeline
